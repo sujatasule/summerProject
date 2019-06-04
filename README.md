@@ -1,2 +1,0 @@
-# summerProject
-School summer project
