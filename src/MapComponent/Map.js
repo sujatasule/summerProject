@@ -1,55 +1,66 @@
-import React, {Component} from 'react';
-import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from 'react-google-maps';
+import React, {useState} from 'react';
 
-function Map() {
-  
-  
-    return (
-    <GoogleMap 
-    defaultZoom={14} 
-    defaultCenter={{ lat: 60.169857, lng: 24.938379 }}
+import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
+
+
+
+export default withScriptjs(withGoogleMap((props) => {
+
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  var data = [];
+  console.log(props.apidata)
+  return (
+
+    <GoogleMap
+
+      defaultZoom={14}
+
+      defaultCenter={{ lat: 60.169857, lng: 24.938379 }}
+
     >
-      <Marker
-      position={
-       { lat: 60.244960, 
-          lng: 24.989050
-      }
-      }
-    
-      />
-  
+
+      {props.apidata.map((event, index) => (
+
+        <Marker
+
+          key={index}
+          position={{
+            lat: event.location.lat,
+            lng: event.location.lon
+          }}
+          onClick={() => {
+            setSelectedEvent(event);
+          }}
+        />
+      ))}
+
+      {selectedEvent && (
         <InfoWindow
-        position={
-          { lat: 60.244960, 
-             lng: 24.989050
-         }
-         }
+        position={{
+          lat: selectedEvent.location.lat,
+          lng: selectedEvent.location.lon
+        }}
+        onCloseClick={() => {
+          setSelectedEvent(null);
+        }}
         >
-          <div>Events details</div>
+          <div>
+         <h2> {selectedEvent.name.fi}</h2>
+         <p>Description: {selectedEvent.description.intro}</p>
+         <p>Address: {selectedEvent.location.address.street_address}</p>
+         <p>Events info: {selectedEvent.info_url}</p>
+         <p>Starting date: {selectedEvent.event_dates.starting_day}</p>
+         <p>Ending date: {selectedEvent.event_dates.ending_day}</p>
+          </div>
           </InfoWindow>
-     
-      </GoogleMap>
-    );
-  }
-  
-  const WrappedMap = withScriptjs(withGoogleMap(Map));
+      )}
+    </GoogleMap>
 
-
-export default class App extends Component {
-  render () {
-    return (
-      <div style={{ width: "100vw", height: "100vh" }}>
-      <WrappedMap 
-      googleMapURL = {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_API_KEY}`}
-      loadingElement={<div style={{height: "100%"}} />}
-      containerElement = {<div style={{height: "100%"}} />}
-      mapElement={<div style={{height: "100%"}} />}
-      />
-  
-  </div>
-    
   );
+
 }
-}
+
+));
 
 
