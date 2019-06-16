@@ -1,15 +1,37 @@
-/* .App {
-  text-align: center;
-}
-
 .box {
-  width: 500px;
-  height: 500px;
-  margin: 20px;
+  min-height: calc(100vh - 5em);
+  width: 100vw;
+  margin-top: 0;
 }
 
-.styleDiv {
-  margin: 20px;
-  border: 1px solid grey;
-  padding: 20px;
-} */
+.loading-element {
+  height: 100%;
+  margin-top: 0;
+}
+
+.container-element {
+  height: calc(100vh - 5em);
+  margin-top: 0;
+}
+
+.map-element {
+  height: 100%;
+}
+
+.card-deck {
+  margin: 1.25rem 1.25rem 1.25rem 1.25rem !important;
+}
+
+.card {
+  padding: 0.625rem 0.625rem 0.625rem 0.625rem !important;
+}
+
+.card-title {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.card-subtitle {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
