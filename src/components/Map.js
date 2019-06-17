@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import './Map.css';
 
 
 
@@ -12,7 +12,9 @@ export default withScriptjs(withGoogleMap((props) => {
   console.log(props.apidata)
   return (
 
-    <GoogleMap
+    <div>
+
+    <GoogleMap className="map"
 
       defaultZoom={14}
 
@@ -46,16 +48,18 @@ export default withScriptjs(withGoogleMap((props) => {
         }}
         >
           <div>
-         <h2> {selectedEvent.name.fi}</h2>
-         <p>Description: {selectedEvent.description.intro}</p>
-         <p>Address: {selectedEvent.location.address.street_address}</p>
-         <p>Events info: {selectedEvent.info_url}</p>
-         <p>Starting date: {selectedEvent.event_dates.starting_day}</p>
-         <p>Ending date: {selectedEvent.event_dates.ending_day}</p>
+             <h2> {selectedEvent.name.fi}</h2>
+             <p>Description: {selectedEvent.description.intro}</p>
+             <p>Address: {selectedEvent.location.address.street_address}</p>
+             <p>Events info: {selectedEvent.info_url}</p>
+             <p>Starting date: {selectedEvent.event_dates.starting_day}</p>
+             <p>Ending date: {selectedEvent.event_dates.ending_day}</p>
           </div>
           </InfoWindow>
       )}
     </GoogleMap>
+
+    </div>
 
   );
 

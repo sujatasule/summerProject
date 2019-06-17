@@ -1,0 +1,13 @@
+.navbar {
+  min-height: 5em;
+}
+
+.navbar-brand {
+  font-size: 1.563em;
+  letter-spacing: 0.125em;
+}
+
+.navlink {
+  color: #fff !important;
+  font-size: 1.125em;
+}

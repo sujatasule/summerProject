@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logo.PNG';
+import './Navbar.css';
 import {
     Collapse,
     Navbar,
@@ -8,10 +8,11 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    // UncontrolledDropdown,
+    // DropdownToggle,
+    // DropdownMenu,
+    // DropdownItem
+} from 'reactstrap';
 
     export default class Example extends React.Component {
         constructor(props) {
@@ -22,26 +23,28 @@ import {
             isOpen: false
           };
         }
+
         toggle() {
           this.setState({
             isOpen: !this.state.isOpen
           });
         }
+
         render() {
           return (
             <div>
-              <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">
-                <img src={logo} alt="logo" style={{width:'100px'}} />
+              <Navbar className="navbar" color="dark" dark expand="md">
+                <NavbarBrand className="navbar-brand" href="/">
+                EventFinder
                 </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                   <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href='#'>Home</NavLink>
+                      <NavLink className="navlink" href='#'>Home</NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="#">Contact Us</NavLink>
+                      <NavLink className="navlink" href="#">Contact Us</NavLink>
                     </NavItem>
                   </Nav>
                 </Collapse>
