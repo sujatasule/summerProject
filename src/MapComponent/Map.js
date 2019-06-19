@@ -1,25 +1,40 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
 
 
 export default withScriptjs(withGoogleMap((props) => {
-
+/** set react hooks for state */
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  var data = [];
+    const [location, setLocation] = useState({lat: 60.244961, 
+      lng: 24.989050});
+
+
   console.log(props.apidata)
+
+  /** get user location */
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLocation({lat:position.coords.latitude, lng:position.coords.longitude})  
+    }
+    )
+  },
+  []
+  ) 
+    
   return (
 
     <GoogleMap
 
       defaultZoom={14}
 
-      defaultCenter={{ lat: 60.169857, lng: 24.938379 }}
+      defaultCenter={{ lat:60.169857 , lng: 24.938379 }}
+      center = {{lat: location.lat, lng: location.lng}}
 
     >
-
+    {/** data pass as props from index.js */}
       {props.apidata.map((event, index) => (
 
         <Marker

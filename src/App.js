@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import Map from './MapComponent/Map';
+import Style from './Style';
+import { Container, Row, Col } from 'reactstrap';
 
 
 
@@ -14,8 +16,9 @@ class App extends Component {
             event: []
         };
     }
+    /** fetch data from server */
     componentDidMount() {
-        fetch('http://localhost:3030/api/events?')
+        fetch('http://localhost:3030/api/events?limit=21')
             .then(res => {
                 return res.json()
             })
@@ -27,47 +30,33 @@ class App extends Component {
     }
 
     render() {
-
-
-
-
-
-
         return (
-            <div>
-                {this.state.loading || !this.state.event ? (<div>Loading ....</div>
-                ) : (
-                        <div className="box">
-                            {this.state.event.map((events, index) => {
-                                return (
-                                    <div className="styleDiv" key={index}>
-                                        <div>Event name: {events.name.fi}</div>
-                                        <div> Image: {events.event_dates.starting_day}</div>
-                                        <div> Description: {events.description.intro}</div>
-                                        <div> Location: {events.location.address.street_address}</div>
-                                        <div> Events info: {events.info_url}</div>
-                                    </div>
-                                )
-                            }
+            <Container fluid>
+                <Row>
+                    a text
+                </Row>
+                <Row>
+                    <Col>
+                        <Map
 
-                            )}
-                            <Map
+                            googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=" + process.env.REACT_APP_API_KEY}
 
-                                googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key="+process.env.REACT_APP_API_KEY}
+                            loadingElement={<div style={{ height: `100%` }} />}
 
-                                loadingElement={<div style={{ height: `100%` }} />}
+                            containerElement={<div style={{ height: `400px` }} />}
 
-                                containerElement={<div style={{ height: `400px` }} />}
+                            mapElement={<div style={{ height: `100%` }} />}
 
-                                mapElement={<div style={{ height: `100%` }} />}
+                            apidata={this.state.event}
 
-                                apidata = {this.state.event}
+                        />
 
-                            />
-                        </div>
-                    )}
-
-            </div>
+                    </Col>
+                </Row>
+                <Row>
+                        <Style apidata={this.state.event} />
+                </Row>
+            </Container>
         )
     }
 }
